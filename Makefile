@@ -12,7 +12,7 @@ CPPFLAGS = -Wall -g  -I$(INC) -c
 $(BIN)/grafos: $(OBJ)/grafos.o $(LIB)/libgrafos.a
 	$(CXX) -o $(BIN)/grafos $(OBJ)/grafos.o -I$(INC) -L$(LIB) -lgrafos
 
-$(LIB)/libgrafos.a : $(OBJ)/Nodo.o $(OBJ)/Arista.o $(OBJ)/Grafo.o
+$(LIB)/libgrafos.a : $(OBJ)/Nodo.o $(OBJ)/Arista.o $(OBJ)/Grafo.o $(OBJ)/tsp_insercion.o
 	ar rvs $(LIB)/libgrafos.a $(OBJ)/Nodo.o $(OBJ)/Arista.o $(OBJ)/Grafo.o $(OBJ)/tsp_insercion.o
 
 $(OBJ)/Nodo.o : $(SRC)/Nodo.cpp

@@ -1,5 +1,5 @@
-#ifndef TSPINSERCION_H
-#define TSPINSERCION_H
+#ifndef TSP_INSERCION_H
+#define TSP_INSERCION_H
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -13,7 +13,7 @@
 using namespace std;
 using namespace std::chrono;
 
-//Función que lee el archivo de datos y transforma el problema en un vectro de nodos
+//Función que lee el archivo de datos y transforma el problema en un vector de nodos
 void llenaGrafo(vector<nodo> &grafo,const char fichero[]);
 
 //Cálculo de las distancias entre ciudades
