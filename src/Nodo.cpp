@@ -27,3 +27,12 @@ int nodo::getIDNodo(){
 int nodo::getGradoNodo(){
     return gradoNodo;
 }
+
+void nodo::setCiudad(double x, double y){
+    this->x=x;
+    this->y=y;
+}
+
+double nodo::getX(){return this->x;}
+
+double nodo::getY(){return this->y;}
