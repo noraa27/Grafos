@@ -9,6 +9,7 @@ class nodo{
     private:
         int idnodo;
         int gradoNodo;
+        double x, y;
 
     public:
         nodo();
@@ -22,5 +23,11 @@ class nodo{
         int getIDNodo();
 
         int getGradoNodo();
+
+        void setCiudad(double x, double y);
+
+        double getX();
+
+        double getY();
 };
 #endif
