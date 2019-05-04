@@ -14,7 +14,7 @@ using namespace std;
 using namespace std::chrono;
 
 //Función que lee el archivo de datos y transforma el problema en un vector de nodos
-void llenaGrafo(vector<nodo> &grafo,const char fichero[]);
+vector<nodo> llenaGrafo_cercania(const char fichero[]);
 
 //Cálculo de las distancias entre ciudades
 void distancia(vector<nodo> &grafo, vector<vector<double>> &distancias);

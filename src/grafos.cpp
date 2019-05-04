@@ -1,7 +1,8 @@
 #include "Grafo.h"
 #include "tsp_insercion.h"
+#include "tsp_cercania.h"
 
-int main(int argc, char* argv[]){
+/*int main(int argc, char* argv[]){
 
 	vector<nodo> ciudades;
 	vector<nodo> solucionC;
@@ -57,6 +58,20 @@ int main(int argc, char* argv[]){
 	}
 
 	return 0;
+}*/
+
+
+// FRAN //
+int main(int argc, char* argv[]){
+
+	vector<nodo> nodos, solucion;
+	nodos = llenaGrafo_cercania(argv[1]);
+	calcularRuta(nodos, solucion);
+
+	for(int i = 0; i < (int) solucion.size(); i++)
+		cout << solucion[i].getIDNodo() << " " << solucion[i].getX() << " " << solucion[i].getY() << endl;
+
+	cout << endl << calcularDistanciaNodos(solucion) << endl;
+
+	return 0;
 }
-
-

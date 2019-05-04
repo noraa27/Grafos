@@ -3,7 +3,9 @@
 
 nodo::nodo(){
     this->idnodo = 0;
-    this->gradoNodo = 0; 
+    this->gradoNodo = 0;
+    this->x = 0;
+    this->y = 0;
 }
 
 nodo::nodo(int id, int g){
@@ -29,8 +31,8 @@ int nodo::getGradoNodo(){
 }
 
 void nodo::setCiudad(double x, double y){
-    this->x=x;
-    this->y=y;
+    this->x = x;
+    this->y = y;
 }
 
 double nodo::getX(){return this->x;}
