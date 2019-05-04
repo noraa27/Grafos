@@ -8,11 +8,17 @@ CPPFLAGS = -Wall -g  -I$(INC) -c
 
 
 # **** Compilación de módulos ****
+$(BIN)/tsp_insercion: $(OBJ)/tsp_insercion.o $(OBJ)/Nodo.o 
+	$(CXX) -o $(BIN)/tsp_insercion $(OBJ)/tsp_insercion.o -I$(INC) -L$(LIB) -lgrafos
+
 $(BIN)/grafos: $(OBJ)/grafos.o $(LIB)/libgrafos.a
 	$(CXX) -o $(BIN)/grafos $(OBJ)/grafos.o -I$(INC) -L$(LIB) -lgrafos
 
 $(LIB)/libgrafos.a : $(OBJ)/Nodo.o $(OBJ)/Arista.o $(OBJ)/Grafo.o
-	ar rvs $(LIB)/libgrafos.a $(OBJ)/Nodo.o $(OBJ)/Arista.o $(OBJ)/Grafo.o  
+	ar rvs $(LIB)/libgrafos.a $(OBJ)/Nodo.o $(OBJ)/Arista.o $(OBJ)/Grafo.o $(OBJ)/tsp_insercion.o
+
+$(OBJ)/tsp_insercion.o : $(SRC)/tsp_insercion.cpp
+	$(CXX) $(CPPFLAGS)  -o $(OBJ)/tsp_insercion.o $(SRC)/tsp_insercion.cpp -I$(INC)
 
 $(OBJ)/Nodo.o : $(SRC)/Nodo.cpp
 	$(CXX) $(CPPFLAGS)  -o $(OBJ)/Nodo.o $(SRC)/Nodo.cpp -I$(INC)
