@@ -65,13 +65,23 @@
 int main(int argc, char* argv[]){
 
 	vector<nodo> nodos, solucion;
+	high_resolution_clock::time_point tantes, tdespues;
+	duration<double> transcurrido;
+
 	nodos = llenaGrafo_cercania(argv[1]);
+
+	tantes = high_resolution_clock::now();
 	calcularRuta(nodos, solucion);
+	tdespues = high_resolution_clock::now();
+
+	transcurrido = duration_cast<duration<double>>(tdespues-tantes);
 
 	for(int i = 0; i < (int) solucion.size(); i++)
 		cout << solucion[i].getIDNodo() << " " << solucion[i].getX() << " " << solucion[i].getY() << endl;
 
 	cout << endl << calcularDistanciaNodos(solucion) << endl;
+
+	cout << endl << "Transcurrido: " << transcurrido.count() << endl;
 
 	return 0;
 }
