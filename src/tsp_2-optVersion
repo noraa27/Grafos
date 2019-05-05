@@ -1,0 +1,118 @@
+#include "Nodo.h"
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <cmath>
+#include <string>
+#include <chrono>
+
+
+//Función que lee el archivo de datos y transforma el problema en un vector de nodos
+vector<nodo> llenaGrafo_2opt(const char  fichero[]){
+    ifstream f(fichero);
+    double valor = 0.0;
+    double x,y;
+    nodo ciudad;
+    vector<nodo> res;
+
+    if (f.is_open()){
+
+        while(f >> valor >> x >> y){
+            ciudad.setID(valor);
+            ciudad.setCiudad(x,y);
+
+            res.push_back(ciudad);
+        }
+
+        f.close();
+    }
+
+    else{
+    	cout << "Error en la lectura del archivo" << endl;
+    }
+
+    return res;
+}
+
+//Función para calcular la distancia de un camino
+int Coste(vector<nodo> camino){
+  double distancia = 0.0, x1 = 0.0, x2 = 0.0, y1 = 0.0, y2 = 0.0;
+	for(int i = 1; i < (int) camino.size(); i++){
+		x1 = camino[i-1].getX();
+		y1 = camino[i-1].getY();
+		x2 = camino[i].getX();
+		y2 = camino[i].getY();
+
+		distancia += sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+	}
+	return distancia;
+}
+
+vector<nodo> TwoOptAlgorithm(vector<nodo> camino){
+  vector<nodo> optimo_camino;
+  bool mejorado = true;
+  vector<nodo> nuevo_camino;
+  while(mejorado){
+    mejorado = false;
+    for( unsigned i=0; i<camino.size() - 1; i++){
+      for( unsigned j=i+1; j<camino.size() - 1; j++ ){
+        nuevo_camino = camino;
+        if( i >= camino.size()/2){
+          //Intercambiamos los valores en la segunda mitad del vector
+          nuevo_camino[i] = camino[camino.size()];
+          nuevo_camino[camino.size()] = camino[i];
+          //Comparamos si la distancia del nuevo camino encontrado es
+          //mejor que la del anterior(original o modificado)
+        }
+        if( Coste(nuevo_camino) < Coste(camino) ){
+          optimo_camino = nuevo_camino;
+          mejorado = true;
+        }
+      }
+    }
+    //guardamos el camino optimo en nuestro camino
+    camino = optimo_camino;
+  }
+  return optimo_camino;
+}
+
+
+int main(int argc, char * argv[]){
+/*
+Aquí se muestra la funcionalidad del algoritmo 2-opt
+*/
+cout << "Comienzo" << endl;
+
+vector<nodo> camino, camino_optimo;
+
+cout << "Rellenando grafo..." ;
+camino = llenaGrafo_2opt(argv[1]);
+cout << "Grafo rellenado" << endl;
+
+cout << "\n----Camino original----\n\n";
+
+for( unsigned i=0; i<camino.size(); i++){
+  cout << "(" << camino[i].getX() << ", " << camino[i].getY() << ")" ;
+  if( i == camino.size() -1)
+  cout << "(" << camino[i].getX() << ", " << camino[i].getY() << ")" ;
+}
+cout << endl << endl;
+
+
+//camino_optimo = TwoOptAlgorithm(camino);
+
+cout << "----Camino modificado----\n\n";
+
+for( unsigned i=0; i<camino.size(); i++){
+  cout << "(" << camino[i].getX() << ", " << camino[i].getY() << ")" ;
+  if( i == camino.size() -1)
+  cout << "(" << camino[i].getX() << ", " << camino[i].getY() << ")" ;
+}
+
+cout << "\n\n--------FIN---------";
+cout << endl;
+
+return  0;
+}
